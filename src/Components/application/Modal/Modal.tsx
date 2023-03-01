@@ -1,13 +1,13 @@
 import { useActions } from "../../../hooks/useActions";
 import "./index.css";
 
-const Modal = ({ content }: ModalPropsType) => {
+const Modal = ({ children }: ModalPropsType) => {
   const { toggleModal } = useActions();
   return (
     <>
       <div className="modal">
         <div className="modal-content">
-          <div className="content-box"> {content}</div>
+          <div className="content-box"> {children}</div>
           <button onClick={toggleModal}>Close</button>
         </div>
       </div>
@@ -18,5 +18,5 @@ const Modal = ({ content }: ModalPropsType) => {
 export default Modal;
 
 interface ModalPropsType {
-  content: any;
+  children: React.ReactNode;
 }
