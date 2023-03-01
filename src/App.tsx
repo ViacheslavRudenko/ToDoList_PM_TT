@@ -1,6 +1,6 @@
 import "./App.css";
-import CreateToDo from "./Components/CreateToDo/CreateToDo";
-import ToDoList from "./Components/ToDo/ToDoList/ToDoList";
+import CreateToDo from "./Components/application/CreateToDo/CreateToDo";
+import ToDoList from "./Components/application/ToDo/ToDoList/ToDoList";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { ToDoType } from "../../../store/ToDo/types";
+import { ToDoType } from "../../../../store/ToDo/types";
 import "./index.css";
 
 const ToDoItem = (props: ToDoPropsType) => {

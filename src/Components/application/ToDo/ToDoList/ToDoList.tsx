@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useActions } from "../../../hooks/useActions";
-import { RootState } from "../../../store/root-reducer";
-import { ToDoType } from "../../../store/ToDo/types";
+import { useActions } from "../../../../hooks/useActions";
+import { RootState } from "../../../../store/root-reducer";
+import { ToDoType } from "../../../../store/ToDo/types";
 import Modal from "../../Modal/Modal";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import "./index.css";
