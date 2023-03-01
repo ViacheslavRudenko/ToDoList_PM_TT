@@ -19,3 +19,9 @@ export const deleteToDo = (id: number) => {
         })
     }
 }
+
+export const toggleModal = () => {
+    return async (dispatch: Dispatch<ToDoAction>) => {
+        dispatch({ type: ToDoActionTypes.TOGGLE_MODAL })
+    }
+}
