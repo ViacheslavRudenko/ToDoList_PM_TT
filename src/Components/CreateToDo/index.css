@@ -11,6 +11,7 @@
 .create__item {
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 .create__item > input {
   width: 240px;
@@ -31,4 +32,12 @@
   border: 1px solid #000;
   height: 25px;
   box-sizing: border-box;
+}
+.create__item > .err-input {
+  border: 1px solid red;
+}
+.create__item > .err-text {
+  position: absolute;
+  bottom: -50px;
+  color: red;
 }
