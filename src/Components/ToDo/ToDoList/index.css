@@ -1,0 +1,15 @@
+.container {
+  max-width: 600px;
+  padding-top: 100px;
+}
+.title {
+  background-color: rgb(160, 160, 160);
+  display: flex;
+  justify-content: space-around;
+}
+.title > p {
+  background-color: inherit;
+}
+
+.content {
+}
