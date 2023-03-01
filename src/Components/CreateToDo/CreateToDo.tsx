@@ -17,10 +17,13 @@ function CreateToDo() {
   const isEmpty = (str: string) => str.trim().length === 0;
 
   const setNewToDo = () => {
-    setInputTitleErr(isEmpty(title));
-    setInputDescriptionErr(isEmpty(description));
+    const isTitleErr = isEmpty(title);
+    const isDecroptionErr = isEmpty(description);
 
-    if (!inputTitleErr && !inputDescriptionErr) {
+    setInputTitleErr(isTitleErr);
+    setInputDescriptionErr(isDecroptionErr);
+
+    if (!isTitleErr && !isDecroptionErr) {
       const toDo = { id: data.length + 1, title, description, status: false };
       addToDo(toDo);
       setDescription("");
