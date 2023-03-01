@@ -11,10 +11,10 @@ export const addToDo = (ToDo: ToDoType) => {
     }
 }
 
-export const deleteToDo = (id: number) => {
+export const changeToDoStatus = (id: number) => {
     return async (dispatch: Dispatch<ToDoAction>) => {
         dispatch({
-            type: ToDoActionTypes.DELETE_TODO,
+            type: ToDoActionTypes.CHANGE_TODO_STATUS,
             payload: id,
         })
     }

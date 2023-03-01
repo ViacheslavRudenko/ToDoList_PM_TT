@@ -5,7 +5,7 @@ export interface ToDoState {
 
 export enum ToDoActionTypes {
     ADD_TODO = "ADD_TODO",
-    DELETE_TODO = "DELETE_ADD_TODOTODO",
+    CHANGE_TODO_STATUS = " CHANGE_TODO_STATUS",
     TOGGLE_MODAL = "TOGGLE_MODAL"
 }
 
@@ -13,8 +13,8 @@ interface AddToDoAction {
     type: ToDoActionTypes.ADD_TODO;
     payload: ToDoType;
 }
-interface DeleteToDoAction {
-    type: ToDoActionTypes.DELETE_TODO;
+interface ChangeToDoStatusAction {
+    type: ToDoActionTypes.CHANGE_TODO_STATUS;
     payload: number;
 }
 interface ToggleModalAction {
@@ -24,7 +24,7 @@ interface ToggleModalAction {
 
 export type ToDoAction =
     | AddToDoAction
-    | DeleteToDoAction
+    | ChangeToDoStatusAction
     | ToggleModalAction
 
 export interface ToDoType {

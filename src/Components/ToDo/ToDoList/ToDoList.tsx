@@ -10,10 +10,17 @@ import "./index.css";
 const ToDoList = () => {
   const { data, isModalOpen } = useSelector((state: RootState) => state.ToDo);
   const [modalContent, setModalContent] = useState(<></>);
-  const { toggleModal } = useActions();
+  const { toggleModal, changeToDoStatus } = useActions();
+
+  const changeStatus = (id: number) => {
+    changeToDoStatus(id);
+  };
+
   const openModal = (data: ToDoType) => {
     toggleModal();
-    setModalContent(<ToDoItem toDo={data} isModal={true} />);
+    setModalContent(
+      <ToDoItem toDo={data} isModal={true} changeStatus={changeStatus} />
+    );
   };
 
   return (
@@ -29,7 +36,7 @@ const ToDoList = () => {
           <ul className="content">
             {data.map((item: ToDoType) => (
               <ol key={item.id}>
-                <ToDoItem toDo={item} openModal={openModal} isModal={false} />
+                <ToDoItem toDo={item} openModal={openModal} />
               </ol>
             ))}
           </ul>

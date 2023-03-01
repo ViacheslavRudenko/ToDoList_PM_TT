@@ -1,9 +1,18 @@
 import { ToDoType } from "../../../store/ToDo/types";
 import "./index.css";
-const ToDoItem = ({ toDo, openModal, isModal }: ToDoPropsType) => {
+const ToDoItem = ({
+  toDo,
+  openModal,
+  isModal = false,
+  changeStatus,
+}: ToDoPropsType) => {
   const onItemClick = () => {
     openModal && openModal(toDo);
   };
+  const chnageItemStatus = () => {
+    changeStatus && changeStatus(toDo.id);
+  };
+
   return (
     <div className={isModal ? "" : "item-box"} onClick={onItemClick}>
       {!isModal && <p>{toDo.id}</p>}
@@ -12,7 +21,11 @@ const ToDoItem = ({ toDo, openModal, isModal }: ToDoPropsType) => {
       <p>{toDo.description}</p>
       <div className={isModal && "modal__status"}>
         {isModal && <span>Status:</span>}
-        <input type="checkbox" checked={toDo.status}></input>
+        <input
+          type="checkbox"
+          checked={toDo.status}
+          onChange={chnageItemStatus}
+        ></input>
       </div>
     </div>
   );
@@ -23,5 +36,6 @@ export default ToDoItem;
 interface ToDoPropsType {
   toDo: ToDoType;
   openModal?: (data: ToDoType) => void;
-  isModal: Boolean;
+  isModal?: Boolean;
+  changeStatus?: (id: number) => void;
 }
