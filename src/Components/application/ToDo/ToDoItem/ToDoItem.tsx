@@ -1,30 +1,22 @@
 import { ToDoType } from "../../../../store/ToDo/types";
+import { cutString } from "../../functions";
 import "./index.css";
 
-const ToDoItem = (props: ToDoPropsType) => {
-  const { toDo, openModal, isModal = false, changeStatus, cutString } = props;
-
+const ToDoItem = ({ toDo, openModal }: ToDoPropsType) => {
   const onItemClick = () => {
-    openModal && openModal(toDo);
-  };
-  const chnageItemStatus = () => {
-    changeStatus && changeStatus(toDo.id);
+    openModal(toDo);
   };
 
   return (
-    <div className={isModal ? "" : "item-box"} onClick={onItemClick}>
-      {!isModal && <p>{toDo.id}</p>}
-      <p className={isModal ? "modal__title" : ""}>
-        {cutString ? cutString(toDo.title) : toDo.title}
-      </p>
-      {isModal && <p className="modal__description-span">Description:</p>}
-      <p>{cutString ? cutString(toDo.description) : toDo.description}</p>
-      <div className={isModal ? "modal__status" : ""}>
-        {isModal && <span>Status:</span>}
+    <div className="item-box" onClick={onItemClick}>
+      <p>{toDo.id}</p>
+      <p>{cutString(toDo.title)}</p>
+      <p>{cutString(toDo.description)}</p>
+      <div>
         <input
           type="checkbox"
           checked={toDo.status}
-          onChange={chnageItemStatus}
+          onChange={() => {}}
         ></input>
       </div>
     </div>
@@ -35,8 +27,5 @@ export default ToDoItem;
 
 interface ToDoPropsType {
   toDo: ToDoType;
-  openModal?: (data: ToDoType) => void;
-  isModal?: Boolean;
-  changeStatus?: (id: number) => void;
-  cutString?: (str: string) => string;
+  openModal: (data: ToDoType) => void;
 }
