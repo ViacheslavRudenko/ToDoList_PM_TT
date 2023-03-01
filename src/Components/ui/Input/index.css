@@ -1,0 +1,23 @@
+.input-box {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50px;
+  position: relative;
+}
+
+.input-box > input {
+  background-color: #fff;
+  border: 1px solid #000;
+  height: 25px;
+  box-sizing: border-box;
+}
+.input-box > .err-input {
+  border: 1px solid red;
+}
+.err-text {
+  position: absolute;
+  bottom: -25px;
+  color: red;
+}
