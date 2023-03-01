@@ -1,8 +1,9 @@
+import { ReactElement } from "react";
 import { ToDoType } from "../../../../store/ToDo/types";
 import { cutString } from "../../functions";
 import "./index.css";
 
-const ToDoItem = ({ toDo, openModal }: ToDoPropsType) => {
+const ToDoItem = ({ toDo, openModal }: ToDoPropsType): ReactElement => {
   const onItemClick = () => {
     openModal(toDo);
   };

@@ -1,9 +1,13 @@
+import { ReactElement } from "react";
 import { ToDoType } from "../../../../store/ToDo/types";
 import "./index.css";
 
-const ModalContent = ({ toDo, changeStatus }: ModalContentPropsType) => {
+const ModalContent = ({
+  toDo,
+  changeStatus,
+}: ModalContentPropsType): ReactElement => {
   const chnageItemStatus = () => {
-    changeStatus && changeStatus(toDo.id);
+    changeStatus(toDo.id);
   };
 
   return (
@@ -27,5 +31,5 @@ export default ModalContent;
 
 interface ModalContentPropsType {
   toDo: ToDoType;
-  changeStatus?: (id: number) => void;
+  changeStatus: (id: number) => void;
 }

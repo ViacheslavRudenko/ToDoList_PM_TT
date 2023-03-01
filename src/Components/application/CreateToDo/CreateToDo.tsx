@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
 import { RootState } from "../../../store/root-reducer";
+import { ToDoType } from "../../../store/ToDo/types";
 import Btn from "../../ui/Btn/Btn";
 import Input from "../../ui/Input/Input";
 import "./index.css";
 
-function CreateToDo() {
+function CreateToDo(): ReactElement {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [inputTitleErr, setInputTitleErr] = useState<Boolean>(false);
@@ -19,14 +20,19 @@ function CreateToDo() {
   const isEmpty = (str: string) => str.trim().length === 0;
 
   const setNewToDo = () => {
-    const isTitleErr = isEmpty(title);
-    const isDecroptionErr = isEmpty(description);
+    const isTitleErr: Boolean = isEmpty(title);
+    const isDecroptionErr: Boolean = isEmpty(description);
 
     setInputTitleErr(isTitleErr);
     setInputDescriptionErr(isDecroptionErr);
 
     if (!isTitleErr && !isDecroptionErr) {
-      const toDo = { id: data.length + 1, title, description, status: false };
+      const toDo: ToDoType = {
+        id: data.length + 1,
+        title,
+        description,
+        status: false,
+      };
       addToDo(toDo);
       setDescription("");
       setTitle("");

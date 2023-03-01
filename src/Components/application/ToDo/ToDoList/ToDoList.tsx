@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../../../hooks/useActions";
 import { RootState } from "../../../../store/root-reducer";
@@ -8,16 +8,22 @@ import ModalContent from "../ModalContent/ModalContent";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import "./index.css";
 
-const ToDoList = () => {
+const ToDoList = (): ReactElement => {
   const { data, isModalOpen } = useSelector((state: RootState) => state.ToDo);
-  const [selectedTodo, setSelectedToDo] = useState<any>({});
-  const { toggleModal, changeToDoStatus } = useActions();
-  const changeStatus = (id: number) => {
-    changeToDoStatus(id);
+  const defaultData = () => {
+    return {
+      id: 0,
+      title: "",
+      description: "",
+      status: false,
+    };
   };
+  const [selectedTodo, setSelectedToDo] = useState<ToDoType>(defaultData);
+  const { toggleModal, changeToDoStatus } = useActions();
 
   useEffect(() => {
-    const item = data?.find((item) => item?.id === selectedTodo?.id) ?? {};
+    const item =
+      data?.find((item) => item?.id === selectedTodo?.id) ?? defaultData;
     setSelectedToDo(item);
   }, [data]);
 
@@ -49,7 +55,7 @@ const ToDoList = () => {
       </div>
       {isModalOpen ? (
         <Modal>
-          <ModalContent toDo={selectedTodo} changeStatus={changeStatus} />
+          <ModalContent toDo={selectedTodo} changeStatus={changeToDoStatus} />
         </Modal>
       ) : (
         <></>

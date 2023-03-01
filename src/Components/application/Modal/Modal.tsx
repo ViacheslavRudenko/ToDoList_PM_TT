@@ -1,7 +1,8 @@
+import { ReactElement } from "react";
 import { useActions } from "../../../hooks/useActions";
 import "./index.css";
 
-const Modal = ({ children }: ModalPropsType) => {
+const Modal = ({ children }: ModalPropsType): ReactElement => {
   const { toggleModal } = useActions();
   return (
     <>
