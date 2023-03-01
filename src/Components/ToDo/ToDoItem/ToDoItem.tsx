@@ -1,11 +1,9 @@
 import { ToDoType } from "../../../store/ToDo/types";
 import "./index.css";
-const ToDoItem = ({
-  toDo,
-  openModal,
-  isModal = false,
-  changeStatus,
-}: ToDoPropsType) => {
+
+const ToDoItem = (props: ToDoPropsType) => {
+  const { toDo, openModal, isModal = false, changeStatus, cutString } = props;
+
   const onItemClick = () => {
     openModal && openModal(toDo);
   };
@@ -16,10 +14,12 @@ const ToDoItem = ({
   return (
     <div className={isModal ? "" : "item-box"} onClick={onItemClick}>
       {!isModal && <p>{toDo.id}</p>}
-      <p className={isModal ? "modal__title" : ""}>{toDo.title}</p>
+      <p className={isModal ? "modal__title" : ""}>
+        {cutString ? cutString(toDo.title) : toDo.title}
+      </p>
       {isModal && <p className="modal__description-span">Description:</p>}
-      <p>{toDo.description}</p>
-      <div className={isModal && "modal__status"}>
+      <p>{cutString ? cutString(toDo.description) : toDo.description}</p>
+      <div className={isModal ? "modal__status" : ""}>
         {isModal && <span>Status:</span>}
         <input
           type="checkbox"
@@ -38,4 +38,5 @@ interface ToDoPropsType {
   openModal?: (data: ToDoType) => void;
   isModal?: Boolean;
   changeStatus?: (id: number) => void;
+  cutString?: (str: string) => string;
 }

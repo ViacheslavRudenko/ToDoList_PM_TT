@@ -23,6 +23,20 @@ const ToDoList = () => {
     );
   };
 
+  const cutString = (str: string) => {
+    const maxLength = 10;
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      let lastSpaceIndex = str.lastIndexOf(" ", maxLength);
+      if (lastSpaceIndex === -1) {
+        return str.substring(0, maxLength);
+      } else {
+        return str.substring(0, lastSpaceIndex) + "...";
+      }
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -36,7 +50,11 @@ const ToDoList = () => {
           <ul className="content">
             {data.map((item: ToDoType) => (
               <ol key={item.id}>
-                <ToDoItem toDo={item} openModal={openModal} />
+                <ToDoItem
+                  toDo={item}
+                  openModal={openModal}
+                  cutString={cutString}
+                />
               </ol>
             ))}
           </ul>
