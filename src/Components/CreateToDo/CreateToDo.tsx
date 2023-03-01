@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
+import { RootState } from "../../store/root-reducer";
 import "./index.css";
 
 function CreateToDo() {
@@ -10,6 +12,7 @@ function CreateToDo() {
     useState<Boolean>(false);
 
   const { addToDo } = useActions();
+  const data = useSelector((state: RootState) => state.ToDo.data);
 
   const isEmpty = (str: string) => str.trim().length === 0;
 
@@ -18,7 +21,7 @@ function CreateToDo() {
     setInputDescriptionErr(isEmpty(description));
 
     if (!inputTitleErr && !inputDescriptionErr) {
-      const toDo = { id: Date.now(), title, description, status: false };
+      const toDo = { id: data.length + 1, title, description, status: false };
       addToDo(toDo);
       setDescription("");
       setTitle("");
