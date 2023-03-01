@@ -5,4 +5,29 @@
   margin-top: 10px;
   background-color: grey;
   padding: 20px 0;
+  cursor: pointer;
+  align-items: center;
+}
+.item-box > p {
+  max-width: 100px;
+}
+
+.modal__title {
+  text-align: center;
+}
+.modal__description-span {
+  padding: 20px 0;
+}
+
+.modal__status {
+  padding-top: 20px;
+}
+
+.modal__status > span {
+  padding-right: 10px;
+}
+
+.modal__description-span,
+.modal__title {
+  font-weight: 600;
 }
