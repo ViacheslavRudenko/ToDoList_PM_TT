@@ -1,15 +1,11 @@
-import { ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { ToDoType } from "../../../../store/ToDo/types";
 import { cutString } from "../../functions";
 import "./index.css";
 
-const ToDoItem = ({ toDo, openModal }: ToDoPropsType): ReactElement => {
-  const onItemClick = () => {
-    openModal(toDo);
-  };
-
+const ToDoItem = ({ toDo }: ToDoPropsType): ReactElement => {
   return (
-    <div className="item-box" onClick={onItemClick}>
+    <div className="item-box">
       <p>{toDo.id}</p>
       <p>{cutString(toDo.title)}</p>
       <p>{cutString(toDo.description)}</p>
@@ -24,9 +20,8 @@ const ToDoItem = ({ toDo, openModal }: ToDoPropsType): ReactElement => {
   );
 };
 
-export default ToDoItem;
+export default memo(ToDoItem);
 
 interface ToDoPropsType {
   toDo: ToDoType;
-  openModal: (data: ToDoType) => void;
 }

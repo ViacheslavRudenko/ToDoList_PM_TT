@@ -4,6 +4,7 @@ import "./index.css";
 
 const Modal = ({ children }: ModalPropsType): ReactElement => {
   const { toggleModal } = useActions();
+
   return (
     <>
       <div className="modal">

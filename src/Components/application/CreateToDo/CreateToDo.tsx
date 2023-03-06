@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, RefObject, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
 import { RootState } from "../../../store/root-reducer";
@@ -8,8 +8,7 @@ import Input from "../../ui/Input/Input";
 import "./index.css";
 
 function CreateToDo(): ReactElement {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const formRef: RefObject<HTMLFormElement> = useRef(null);
   const [inputTitleErr, setInputTitleErr] = useState<Boolean>(false);
   const [inputDescriptionErr, setInputDescriptionErr] =
     useState<Boolean>(false);
@@ -17,46 +16,46 @@ function CreateToDo(): ReactElement {
   const { addToDo } = useActions();
   const data = useSelector((state: RootState) => state.ToDo.data);
 
-  const isEmpty = (str: string) => str.trim().length === 0;
+  const isEmpty = (str: string): Boolean => str.trim().length === 0;
 
-  const setNewToDo = () => {
-    const isTitleErr: Boolean = isEmpty(title);
-    const isDecroptionErr: Boolean = isEmpty(description);
+  const setNewToDo = (event: any): void => {
+    event.preventDefault();
 
-    setInputTitleErr(isTitleErr);
-    setInputDescriptionErr(isDecroptionErr);
+    const form = event.target.elements;
+    const { title, description } = {
+      title: form.Title.value,
+      description: form.Description.value,
+    };
 
-    if (!isTitleErr && !isDecroptionErr) {
+    const isTitleEmpty = isEmpty(title);
+    const isDescriptionEmpty = isEmpty(description);
+
+    if (!isTitleEmpty && !isDescriptionEmpty) {
       const toDo: ToDoType = {
         id: data.length + 1,
         title,
         description,
         status: false,
       };
+
       addToDo(toDo);
-      setDescription("");
-      setTitle("");
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } else {
+      setInputTitleErr(isTitleEmpty);
+      setInputDescriptionErr(isDescriptionEmpty);
     }
   };
 
   return (
-    <div className="create-box">
-      <Input
-        name={"Title"}
-        inputErr={inputTitleErr}
-        value={title}
-        setChange={setTitle}
-      />
-      <Input
-        name={"Description"}
-        inputErr={inputDescriptionErr}
-        value={description}
-        setChange={setDescription}
-      />
+    <form className="create-box" onSubmit={setNewToDo} ref={formRef}>
+      <Input name={"Title"} inputErr={inputTitleErr} />
+      <Input name={"Description"} inputErr={inputDescriptionErr} />
       <div className="create__btn">
-        <Btn click={setNewToDo} name={"Create"} />
+        <Btn name={"Create"} type={"submit"} />
       </div>
-    </div>
+    </form>
   );
 }
 

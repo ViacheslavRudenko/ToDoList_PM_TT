@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { memo, ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../../../hooks/useActions";
 import { RootState } from "../../../../store/root-reducer";
@@ -44,8 +44,8 @@ const ToDoList = (): ReactElement => {
         {data.length ? (
           <ul className="content">
             {data.map((item: ToDoType) => (
-              <ol key={item.id}>
-                <ToDoItem toDo={item} openModal={openModal} />
+              <ol key={item.id} onClick={() => openModal(item)}>
+                <ToDoItem toDo={item} />
               </ol>
             ))}
           </ul>
